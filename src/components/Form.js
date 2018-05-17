@@ -4,40 +4,40 @@ class Form extends React.Component {
   constructor(props) {
     super(props);
     this.state = { value: "feature" };
+    this.handleChangeGender = this.handleChangeGender.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
-  handleChange(event) {
+  handleChangeGender(event) {
     this.setState({ value: event.target.value });
   }
-  handleSubmit(event) {
-    alert("Your favorite flavor is: " + this.state.value);
-    event.preventDefault();
+  handleChange(event) {
+    this.setState({ value: event.target.hair });
   }
+
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
         <label>
           Choose the gender :
-          <select value={this.state.value} onChange={this.handleChange}>
+          <select value={this.state.value} onChange={this.handleChangeGender}>
             <option value="male">Male</option>
             <option value="female">Female</option>
           </select>
         </label>
         <label>
           Choose the Hair Color :
-          <select value={this.state.value} onChange={this.handleChange}>
-            <option value="blond">Blond</option>
-            <option value="brown">Brown</option>
-            <option value="black">Black</option>
-            <option value="light brown">Light Brown</option>
-            <option value="auburn">Auburn</option>
-            <option value="white">White</option>
-            <option value="red">Red</option>
-            <option value="Gold">gold</option>
+          <select hair={this.state.value} onChange={this.handleChange}>
+            <option hair="blond">Blond</option>
+            <option hair="brown">Brown</option>
+            <option hair="black">Black</option>
+            <option hair="light brown">Light Brown</option>
+            <option hair="auburn">Auburn</option>
+            <option hair="white">White</option>
+            <option hair="red">Red</option>
+            <option hair="Gold">gold</option>
           </select>
         </label>
-        <label>
+        {/* <label>
           Choose the eye Color :
           <select value={this.state.value} onChange={this.handleChange}>
             <option value="blue">blue</option>
@@ -48,7 +48,7 @@ class Form extends React.Component {
             <option value="hazel">hazel</option>
             <option value="gray-blue">gray-blue</option>
           </select>
-        </label>
+        </label> */}
       </form>
     );
   }
