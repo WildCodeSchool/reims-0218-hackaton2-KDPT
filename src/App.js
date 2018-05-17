@@ -18,9 +18,7 @@ class App extends Component {
         <Form />
         <StarWars />
       </div>
-
     );
   }
 }
-
 export default App;
