@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Choice from './components/Choice';
+import { Container } from 'reactstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends Component {
   render() {
-    return <div className="App" />;
+    return (
+      <Container>
+        <Choice />
+      </Container>
+    );
   }
 }
 
