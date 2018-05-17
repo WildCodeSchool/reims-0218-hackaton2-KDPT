@@ -1,4 +1,5 @@
 import React from "react";
+import ListLover from "./Listlover";
 
 // Ajouter ici l'appel a l'API X
 
@@ -12,7 +13,7 @@ class Form extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      gender: "female",
+      gender: "female", 
       hair: "black",
       lovers: [],
       selectedLovers: []
@@ -37,7 +38,7 @@ class Form extends React.Component {
 
   myfilterLovers () {
     console.log('filter')
-    const myListLover = this.state.lovers.filter(myLover => this.state.gender === myLover.gender)
+    const myListLover = this.state.lovers.filter(myLover => this.state.gender !== myLover.gender)
     console.log(myListLover)
     // ?? comment je met mylistLover dans le state selectedLovers(this.setState(prevState => ))
     this.setState(prevState =>({ selectedLover : myListLover}))
