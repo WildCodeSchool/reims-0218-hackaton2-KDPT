@@ -1,24 +1,52 @@
 import React from "react";
 
+// Ajouter ici l'appel a l'API X
+
+
+// lover dans state X
+// selectedLover dans state
+//une methode filter lover qui filtre les valeurs lovers par genre et hair et qui setstate selectedlovers
+// listlover affiche selectedlover
+
 class Form extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       gender: "female",
-      hair: "black"
+      hair: "black",
+      lovers: [],
+      selectedLovers: []
     };
     this.handleGenderChange = this.handleGenderChange.bind(this);
     this.handleHairChange = this.handleHairChange.bind(this);
   }
   handleGenderChange(event) {
     this.setState({ gender: event.target.value });
+    this.myfilterLovers()
   }
   handleHairChange(event) {
     this.setState({ hair: event.target.value });
+    this.myfilterLovers()
   }
+  componentDidMount() {
+    const url = 'https://akabab.github.io/starwars-api/api/all.json'
+    fetch(url)
+      .then(res => res.json())
+      .then(loverRes =>{this.setState(prevState => ({ lovers : loverRes }))})
+  }
+
+  myfilterLovers () {
+    console.log('filter')
+    const myListLover = this.state.lovers.filter(myLover => this.state.gender === myLover.gender)
+    console.log(myListLover)
+    // ?? comment je met mylistLover dans le state selectedLovers(this.setState(prevState => ))
+    this.setState(prevState =>({ selectedLover : myListLover}))
+  }
+  
 
   render() {
     return (
+      <div>
       <form onSubmit={this.handleSubmit}>
         <label>
           Choose the gender :
@@ -53,6 +81,8 @@ class Form extends React.Component {
           </select>
         </label> */}
       </form>
+      {/* afficher la liste filtrée(this.state.selectedLovers) avec ListLover */}
+      </div>
     );
   }
 }
