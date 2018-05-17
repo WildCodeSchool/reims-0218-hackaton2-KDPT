@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Form from './components/Form'
-import StarWars from './components/fetch';
+import StarWars from './components/StarWars';
 
 class App extends Component {
   render() {
