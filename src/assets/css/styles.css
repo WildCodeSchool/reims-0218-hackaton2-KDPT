@@ -1,0 +1,10 @@
+@font-face {
+  font-family: 'Strjmono';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Strjmono'), local('Strjmono'),
+    url(../fonts/Strjmono.ttf) format('ttf');
+}
+body {
+  font-family: 'Arial';
+}
