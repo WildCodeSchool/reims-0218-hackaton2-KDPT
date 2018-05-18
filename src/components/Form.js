@@ -33,7 +33,10 @@ class Form extends React.Component {
     fetch(url)
       .then(res => res.json())
       .then(loverRes => {
-        this.setState(prevState => ({ lovers: loverRes }));
+        this.setState(prevState => ({
+          lovers: loverRes,
+          selectedLovers: loverRes
+        }));
       });
   }
 
@@ -44,7 +47,7 @@ class Form extends React.Component {
     );
     console.log(myListLover);
     // ?? comment je met mylistLover dans le state selectedLovers(this.setState(prevState => ))
-    this.setState(prevState => ({ selectedLover: myListLover }));
+    this.setState(prevState => ({ selectedLovers: myListLover }));
   }
 
   render() {
@@ -87,6 +90,7 @@ class Form extends React.Component {
           </select>
         </label> */}
         </form>
+        <ListLover lovers={this.state.selectedLovers} />
         {/* afficher la liste filtrée(this.state.selectedLovers) avec ListLover */}
       </div>
     );

@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import Form from './components/Form';
 import {
   Button,
   Container,
@@ -98,7 +99,9 @@ class DesktopContainer extends Component {
             <HomepageHeading />
           </Segment>
         </Visibility>
-
+        <Container>
+          <Form />
+        </Container>
         {children}
       </Responsive>
     );
@@ -138,11 +141,8 @@ class MobileContainer extends Component {
             <Menu.Item as="a" active>
               Home
             </Menu.Item>
-            <Menu.Item as="a">Work</Menu.Item>
-            <Menu.Item as="a">Company</Menu.Item>
-            <Menu.Item as="a">Careers</Menu.Item>
-            <Menu.Item as="a">Log in</Menu.Item>
-            <Menu.Item as="a">Sign Up</Menu.Item>
+            <Menu.Item as="a">Find love</Menu.Item>
+            <Menu.Item as="a">About</Menu.Item>
           </Sidebar>
 
           <Sidebar.Pusher
