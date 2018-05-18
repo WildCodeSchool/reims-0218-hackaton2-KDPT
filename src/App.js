@@ -12,7 +12,9 @@ import {
   Responsive,
   Segment,
   Sidebar,
-  Visibility
+  Visibility,
+  Card,
+  Image
 } from 'semantic-ui-react';
 
 import 'semantic-ui-css/semantic.min.css';
@@ -99,9 +101,8 @@ class DesktopContainer extends Component {
             <HomepageHeading />
           </Segment>
         </Visibility>
-        <Container>
-          <Form />
-        </Container>
+        <Form />
+        )
         {children}
       </Responsive>
     );
@@ -141,8 +142,9 @@ class MobileContainer extends Component {
             <Menu.Item as="a" active>
               Home
             </Menu.Item>
-            <Menu.Item as="a">Find love</Menu.Item>
-            <Menu.Item as="a">About</Menu.Item>
+            <Menu.Item as="a">Work</Menu.Item>
+            <Menu.Item as="a">Company</Menu.Item>
+            <Menu.Item as="a">Careers</Menu.Item>
           </Sidebar>
 
           <Sidebar.Pusher

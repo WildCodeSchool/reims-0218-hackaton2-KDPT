@@ -1,5 +1,7 @@
 import React from 'react';
 import ListLover from './Listlover';
+import { CardGroup } from 'reactstrap';
+import { GridColumn, Grid, FormField } from 'semantic-ui-react';
 
 class Form extends React.Component {
   constructor(props) {
@@ -98,6 +100,7 @@ class Form extends React.Component {
           </select>
         </label> */}
         </form>
+
         <ListLover lovers={this.state.selectedLovers} />
         {/* afficher la liste filtrée(this.state.selectedLovers) avec ListLover */}
       </div>
