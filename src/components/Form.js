@@ -9,6 +9,7 @@ class FormCher extends React.Component {
       gender: "",
       hairColor: "",
       hairOptions: [],
+      eyeOptions: [],
       lovers: [],
       selectedLovers: []
     };
@@ -42,6 +43,10 @@ class FormCher extends React.Component {
           hairOptions: [
             "",
             ...new Set(loverRes.map(lover => lover.hairColor || "non défini"))
+          ],
+          eyeOptions: [
+            "",
+            ...new Set(loverRes.map(lover => lover.eyeColor || "non défini"))
           ]
         }));
       });
@@ -60,6 +65,12 @@ class FormCher extends React.Component {
           this.state.hairColor === "" ||
           myLover.hairColor === this.state.hairColor ||
           (!myLover.hairColor && this.state.hairColor === "non défini")
+      )
+      .filter(
+        myLover =>
+          this.state.eyeColor === "" ||
+          myLover.eyeColor === this.state.eyeColor ||
+          (!myLover.eyeColor && this.state.eyeColor === "non défini")
       );
     // .filter(myLover => this.state.eyeColor === '' || myLover.eyeColor === this.state.eyeColor)
     console.log(myListLover);
@@ -97,38 +108,19 @@ class FormCher extends React.Component {
             </select>
           </label>
           <label>
-            Choose the eye Color :
+            Choose the Eye Color :
             <select
               value={this.state.eyeColor}
               onChange={this.handleEyeChange}
             >
-              <option value="">Choose a color</option>
-              <option value="blue">blue</option>
-              <option value="yellow">yellow</option>
-              <option value="light brown">light brown</option>
-              <option value="red">red</option>
-              <option value="brown">brown</option>
-              <option value="hazel">hazel</option>
-              <option value="gray-blue">gray-blue</option>
+              {this.state.eyeOptions.map(option => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
             </select>
           </label>
-
-          {/* <label>
-          Choose the eye Color :
-          <select value={this.state.value} onChange={this.handleChange}>
-            <option value="blue">blue</option>
-            <option value="yellow">yellow</option>
-            <option value="light brown">Light Brown</option>
-            <option value="red">red</option>
-            <option value="brown">brown</option>
-            <option value="hazel">hazel</option>
-            <option value="gray-blue">gray-blue</option>
-          </select>
-        </label> */}
-
-
         </form>
-
         <ListLover lovers={this.state.selectedLovers} />
         {/* afficher la liste filtrée(this.state.selectedLovers) avec ListLover */}
       </div>
