@@ -1,14 +1,14 @@
-import React from 'react';
-import { Form } from 'semantic-ui-react';
-import ListLover from './Listlover';
+import React from "react";
+
+import ListLover from "./Listlover";
 
 class FormCher extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      gender: '',
-      hairColor: '',
-      eyeColor: '',
+      gender: "",
+      hairColor: "",
+      hairOptions: [],
       lovers: [],
       selectedLovers: []
     };
@@ -32,35 +32,41 @@ class FormCher extends React.Component {
   }
 
   componentDidMount() {
-    const url = 'https://akabab.github.io/starwars-api/api/all.json';
+    const url = "https://akabab.github.io/starwars-api/api/all.json";
     fetch(url)
       .then(res => res.json())
       .then(loverRes => {
         this.setState(prevState => ({
           lovers: loverRes,
-          selectedLovers: loverRes
+          selectedLovers: loverRes,
+          hairOptions: [
+            "",
+            ...new Set(loverRes.map(lover => lover.hairColor || "non défini"))
+          ]
         }));
       });
   }
 
   myfilterLovers() {
-    console.log('filter');
+    console.log("filter");
     console.log(this.state.gender);
     const myListLover = this.state.lovers
       .filter(
         myLover =>
-          this.state.gender === '' || myLover.gender === this.state.gender
+          this.state.gender === "" || myLover.gender === this.state.gender
       )
       .filter(
         myLover =>
-          this.state.hairColor === '' ||
-          myLover.hairColor === this.state.hairColor
-      )
-      .filter(
-        myLover =>
-          this.state.eyeColor === '' ||
-          myLover.eyeColor === this.state.eyeColor)
-    this.setState(prevState => ({ selectedLovers: myListLover }));
+          this.state.hairColor === "" ||
+          myLover.hairColor === this.state.hairColor ||
+          (!myLover.hairColor && this.state.hairColor === "non défini")
+      );
+    // .filter(myLover => this.state.eyeColor === '' || myLover.eyeColor === this.state.eyeColor)
+    console.log(myListLover);
+    // ?? comment je met mylistLover dans le state selectedLovers(this.setState(prevState => ))
+    this.setState(prevState => ({
+      selectedLovers: myListLover
+    }));
   }
 
   render() {
@@ -83,15 +89,11 @@ class FormCher extends React.Component {
               value={this.state.hairColor}
               onChange={this.handleHairChange}
             >
-              <option value="">Choose a color</option>
-              <option value="blond">Blond</option>
-              <option value="brown">Brown</option>
-              <option value="black">Black</option>
-              <option value="light brown">Light Brown</option>
-              <option value="auburn">Auburn</option>
-              <option value="white">White</option>
-              <option value="red">Red</option>
-              <option value="Gold">gold</option>
+              {this.state.hairOptions.map(option => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
             </select>
           </label>
           <label>
