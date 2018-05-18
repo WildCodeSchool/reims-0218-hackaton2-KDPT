@@ -1,7 +1,6 @@
 import React from 'react';
+
 import ListLover from './Listlover';
-import { CardGroup } from 'reactstrap';
-import { GridColumn, Grid, FormField } from 'semantic-ui-react';
 
 class Form extends React.Component {
   constructor(props) {
@@ -99,6 +98,16 @@ class Form extends React.Component {
             <option value="gray-blue">gray-blue</option>
           </select>
         </label> */}
+
+          <label>
+            Name:
+            <input
+              type="text"
+              value={this.state.value}
+              onChange={this.handleChange}
+            />
+          </label>
+          <input type="submit" value="Valider" />
         </form>
 
         <ListLover lovers={this.state.selectedLovers} />
