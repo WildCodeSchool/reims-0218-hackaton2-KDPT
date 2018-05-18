@@ -1,34 +1,27 @@
 import React from "react";
 import ListLover from "./Listlover";
 
-// Ajouter ici l'appel a l'API X
-
-
-// lover dans state X
-// selectedLover dans state
-//une methode filter lover qui filtre les valeurs lovers par genre et hair et qui setstate selectedlovers
-// listlover affiche selectedlover
-
 class Form extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      gender: "female",
-      hair: "black",
+      gender: "male",
+      hairColor: "black",
       lovers: [],
       selectedLovers: []
+
     };
     this.handleGenderChange = this.handleGenderChange.bind(this);
     this.handleHairChange = this.handleHairChange.bind(this);
 
   }
   handleGenderChange(event) {
-    this.setState({ gender: event.target.value });
-    this.myfilterLovers()
+    this.setState({ gender: event.target.value }, () => this.myfilterLovers());
+    //this.myfilterLovers()
   }
   handleHairChange(event) {
-    this.setState({ hair: event.target.value });
-    this.myfilterLovers()
+    this.setState({ hairColor: event.target.value }, () => this.myfilterLovers());
+
   }
   componentDidMount() {
     const url = 'https://akabab.github.io/starwars-api/api/all.json'
@@ -37,19 +30,22 @@ class Form extends React.Component {
       .then(loverRes => {
         this.setState(prevState => ({
           lovers: loverRes,
-          selectedLovers: loverRes
+          selectedLovers: loverRes,
         }))
       })
   }
 
   myfilterLovers() {
     console.log('filter')
-    const myListLover = this.state.lovers.filter(myLover => this.state.gender !== myLover.gender)
+    console.log(this.state.gender)
+    let myListLover = this.state.lovers
+      .filter(myLover => this.state.gender === '' || myLover.gender === this.state.gender)
+      .filter(myLover => this.state.hairColor === '' || myLover.hairColor === this.state.hairColor)
+    // .filter(myLover => this.state.eyeColor === '' || myLover.eyeColor === this.state.eyeColor)
     console.log(myListLover)
     // ?? comment je met mylistLover dans le state selectedLovers(this.setState(prevState => ))
     this.setState(prevState => ({ selectedLovers: myListLover }))
   }
-
 
   render() {
     return (
@@ -64,7 +60,8 @@ class Form extends React.Component {
           </label>
           <label>
             Choose the Hair Color :
-          <select value={this.state.hair} onChange={this.handleHairChange}>
+          <select value={this.state.hairColor} onChange={this.handleHairChange}>
+              <option value="">Choose a color</option>
               <option value="blond">Blond</option>
               <option value="brown">Brown</option>
               <option value="black">Black</option>
@@ -75,6 +72,7 @@ class Form extends React.Component {
               <option value="Gold">gold</option>
             </select>
           </label>
+
           {/* <label>
           Choose the eye Color :
           <select value={this.state.value} onChange={this.handleChange}>
