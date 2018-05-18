@@ -48,6 +48,9 @@ const HomepageHeading = ({ mobile }) => (
     <Button primary size="huge">
       Find my love <Icon name="heart outline" />
     </Button>
+    <p>
+      We can propose you a new love machine which can find your perfect Star Wars lover. Due to an new revolutionnary algorithms we can offer you the best love experience.
+    </p>
   </Container>
 );
 

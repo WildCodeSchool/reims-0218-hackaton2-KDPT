@@ -2,8 +2,8 @@ import React from 'react';
 import { Card, Button, Image } from 'semantic-ui-react';
 
 const Lover = ({ name, image, hairColor, eyeColor }) => (
-  <Card.Group>
-    <Card>
+  <Card.Group >
+    <Card >
       <Card.Content>
         <Image floated="right" size="mini" src={image} />
         <Card.Header>{name}</Card.Header>

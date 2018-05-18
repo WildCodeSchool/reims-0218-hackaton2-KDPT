@@ -1,6 +1,7 @@
 import React from "react";
 
 import ListLover from "./Listlover";
+import { Segment, Form, Statistic, Container } from "semantic-ui-react"
 
 class FormCher extends React.Component {
   constructor(props) {
@@ -10,12 +11,14 @@ class FormCher extends React.Component {
       hairColor: "",
       hairOptions: [],
       eyeOptions: [],
+      skinOptions: [],
       lovers: [],
       selectedLovers: []
     };
     this.handleGenderChange = this.handleGenderChange.bind(this);
     this.handleHairChange = this.handleHairChange.bind(this);
     this.handleEyeChange = this.handleEyeChange.bind(this);
+    this.handleSkinChange = this.handleSkinChange.bind(this);
   }
   handleGenderChange(event) {
     this.setState({ gender: event.target.value }, () =>
@@ -28,6 +31,11 @@ class FormCher extends React.Component {
   }
   handleEyeChange(event) {
     this.setState({ eyeColor: event.target.value }, () =>
+      this.myfilterLovers()
+    );
+  }
+  handleSkinChange(event) {
+    this.setState({ skinColor: event.target.value }, () =>
       this.myfilterLovers()
     )
   }
@@ -42,11 +50,15 @@ class FormCher extends React.Component {
           selectedLovers: loverRes,
           hairOptions: [
             "",
-            ...new Set(loverRes.map(lover => lover.hairColor || "non défini"))
+            ...new Set(loverRes.map(lover => lover.hairColor || "chauve"))
           ],
           eyeOptions: [
             "",
             ...new Set(loverRes.map(lover => lover.eyeColor || "non défini"))
+          ],
+          skinOptions: [
+            "",
+            ...new Set(loverRes.map(lover => lover.skinColor || "non défini"))
           ]
         }));
       });
@@ -64,14 +76,21 @@ class FormCher extends React.Component {
         myLover =>
           this.state.hairColor === "" ||
           myLover.hairColor === this.state.hairColor ||
-          (!myLover.hairColor && this.state.hairColor === "non défini")
+          (!myLover.hairColor && this.state.hairColor === "chauve")
       )
       .filter(
         myLover =>
           this.state.eyeColor === "" ||
           myLover.eyeColor === this.state.eyeColor ||
           (!myLover.eyeColor && this.state.eyeColor === "non défini")
-      );
+      )
+      .filter(
+        myLover =>
+          this.state.skinColor === "" ||
+          myLover.skinColor === this.state.skinColor ||
+          (!myLover.skinColor && this.state.skinColor === "non défini")
+      )
+      ;
     // .filter(myLover => this.state.eyeColor === '' || myLover.eyeColor === this.state.eyeColor)
     console.log(myListLover);
     // ?? comment je met mylistLover dans le state selectedLovers(this.setState(prevState => ))
@@ -83,46 +102,71 @@ class FormCher extends React.Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Choose the gender :
-            <select
-              value={this.state.gender}
-              onChange={this.handleGenderChange}
-            >
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-            </select>
-          </label>
-          <label>
-            Choose the Hair Color :
-            <select
-              value={this.state.hairColor}
-              onChange={this.handleHairChange}
-            >
-              {this.state.hairOptions.map(option => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
-          </label>
-          <label>
-            Choose the Eye Color :
-            <select
-              value={this.state.eyeColor}
-              onChange={this.handleEyeChange}
-            >
-              {this.state.eyeOptions.map(option => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
-          </label>
-        </form>
-        <ListLover lovers={this.state.selectedLovers} />
-        {/* afficher la liste filtrée(this.state.selectedLovers) avec ListLover */}
+        <Container>
+          <Segment textAlign="left">
+            <Form onSubmit={this.handleSubmit}>
+              <label>
+                <Statistic size="mini">
+                  <Statistic.Value>Choose the gender : </Statistic.Value>
+                </Statistic>
+                <select
+                  value={this.state.gender}
+                  onChange={this.handleGenderChange}
+                >
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </select>
+              </label>
+              <label>
+                <Statistic size="mini">
+                  <Statistic.Value>Choose the Hair Color : </Statistic.Value>
+                </Statistic>
+                <select
+                  value={this.state.hairColor}
+                  onChange={this.handleHairChange}
+                >
+                  {this.state.hairOptions.map(option => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label>
+                <Statistic size="mini">
+                  <Statistic.Value>Choose the Eye Color : </Statistic.Value>
+                </Statistic>
+                <select
+                  value={this.state.eyeColor}
+                  onChange={this.handleEyeChange}
+                >
+                  {this.state.eyeOptions.map(option => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label>
+                <Statistic size="mini">
+                  <Statistic.Value>Choose the skin Color : </Statistic.Value>
+                </Statistic>
+                <select
+                  value={this.state.skinColor}
+                  onChange={this.handleSkinChange}
+                >
+                  {this.state.skinOptions.map(option => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            </Form>
+            <ListLover lovers={this.state.selectedLovers} />
+            {/* afficher la liste filtrée(this.state.selectedLovers) avec ListLover */}
+          </Segment>
+        </Container>
       </div>
     );
   }
